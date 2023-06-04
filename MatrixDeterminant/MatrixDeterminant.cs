@@ -6,25 +6,15 @@ namespace MatrixDeterminant
     {
         public static int CalculateDeterminant(int[][] matrix)
         {
-            if(matrix.Length == 1)
+            var determinant = 0;
+
+            if (matrix.Length == 1)
             {
                 return matrix[0][0];
             }
-
-            return Calc(matrix);
-        }
-
-        private static int Calc(int[][] matrix)
-        {
-            var determinant = 0;
-
-            if (matrix.Length == 2)
-            {
-                return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
-            }
             else
             {
-                for(int i = 0; i < matrix.Length; i ++)
+                for (int i = 0; i < matrix.Length; i++)
                 {
                     var newMatrix = new int[matrix.Length - 1][];
 
@@ -49,7 +39,7 @@ namespace MatrixDeterminant
                         }
                     }
 
-                    determinant += i%2 == 0? matrix[0][i] * Calc(newMatrix) : - matrix[0][i] * Calc(newMatrix);
+                    determinant += i % 2 == 0 ? matrix[0][i] * CalculateDeterminant(newMatrix) : -matrix[0][i] * CalculateDeterminant(newMatrix);
                 }
 
                 return determinant;
